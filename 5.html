@@ -1,0 +1,238 @@
+5.HTML
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS | Plataforma Empresarial</title>
+  <meta name="google-site-verification" content="IK7rOoFo8AH7J2IfH-hgIOyUwaSKsWShaHN0F58ldYE" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0f1a; color: #e0e0e0; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+    .logo { text-align: center; margin-bottom: 30px; }
+    .logo h1 { font-size: 3rem; color: #0ff; }
+    .logo p { color: #a0aec0; }
+
+    .tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+    .tab { padding: 12px 20px; border-radius: 30px; font-weight: bold; cursor: pointer; border: 2px solid #2d3748; background: #111827; color: #a0aec0; transition: 0.3s; }
+    .tab:hover { border-color: #0ff; color: #fff; }
+    .tab.active { background: #0ff; color: #0a0f1a; border-color: #0ff; }
+
+    .chat-box { background: #111827; border: 1px solid #2d3748; border-radius: 16px; padding: 25px; min-height: 350px; display: flex; flex-direction: column; }
+    .messages { flex: 1; overflow-y: auto; margin-bottom: 20px; padding-right: 10px; }
+    .msg { margin-bottom: 12px; padding: 12px 16px; border-radius: 12px; max-width: 80%; word-wrap: break-word; font-size: 0.95rem; line-height: 1.4; }
+    .msg.bot { background: #1e293b; border: 1px solid #0ff; color: #e0e0e0; }
+    .msg.user { background: #0ff; color: #0a0f1a; margin-left: auto; text-align: right; }
+
+    .input-area { display: flex; gap: 10px; }
+    input { flex: 1; padding: 14px 18px; border-radius: 30px; border: 1px solid #2d3748; background: #1e293b; color: #fff; font-size: 1rem; outline: none; }
+    input:focus { border-color: #0ff; }
+    button { background: #0ff; color: #0a0f1a; border: none; padding: 14px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+
+    .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+    .price-card { background: #111827; border: 1px solid #2d3748; border-radius: 12px; padding: 20px; text-align: center; }
+    .price-card h4 { color: #0ff; margin-bottom: 8px; }
+    .price-card .price { font-size: 1.5rem; font-weight: 700; color: #fff; }
+
+    .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 30px; }
+    .galeria-item { background: #0A2840; border: 1px solid #1A4460; border-radius: 18px; overflow: hidden; transition: transform .3s ease, box-shadow .3s ease; }
+    .galeria-item:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(10,132,255,.25); }
+    .galeria-item img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .galeria-item .contenido { padding: 18px; }
+    .galeria-item h4 { color: #4DB8FF; margin-bottom: 10px; font-size: 1.05rem; }
+    .galeria-item p { font-size: .92rem; color: #C7D4E8; line-height: 1.5; }
+
+    footer { text-align: center; margin-top: 40px; color: #64748b; font-size: 0.85rem; }
+    a { color: #0ff; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .logo h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <h1>⚡ NEXUS</h1>
+      <p>Automatización inteligente en tiempo real</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('simple')">🟢 Simple</button>
+      <button class="tab" onclick="switchTab('pro')">🟡 Profesional</button>
+      <button class="tab" onclick="switchTab('senior')">🟠 Senior</button>
+      <button class="tab" onclick="switchTab('enterprise')">🔴 Enterprise</button>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat-box">
+      <div class="messages" id="messages">
+        <div class="msg bot" id="welcome">👋 ¡Hola! Soy <strong>NEXUS Simple</strong>. Estoy aquí para atender a tus clientes y ayudarte a vender 24/7. Escribime tu consulta.</div>
+      </div>
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Escribí tu consulta..." autofocus>
+        <button onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="pricing">
+      <div class="price-card"><h4>🟢 Simple</h4><p class="price">USD 1.800</p><p style="color:#a0aec0">+ USD 100/mes</p></div>
+      <div class="price-card"><h4>🟡 Profesional</h4><p class="price">USD 2.400</p></div>
+      <div class="price-card"><h4>🟠 Senior</h4><p class="price">USD 3.200</p></div>
+      <div class="price-card"><h4>🔴 Enterprise</h4><p class="price">Consultar</p></div>
+    </div>
+
+    <!-- Galería -->
+    <h2 style="color:#0ff;margin:50px 0 20px;">🖼️ Proyectos y Entornos Reales</h2>
+    <p style="text-align:center;max-width:900px;margin:0 auto 40px;">
+      Cada imagen representa un entorno profesional con su explicación detallada, mostrando cómo NEXUS potencia la automatización, el análisis y la atención empresarial.
+    </p>
+
+    <h3 style="color:#4DB8FF;margin:40px 0 20px;">⚙️ Automatización Empresarial</h3>
+    <div class="galeria-grid">
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Automatización">
+        <div class="contenido">
+          <h4>Flujos de trabajo inteligentes</h4>
+          <p>Automatización de procesos operativos y administrativos para mejorar la productividad empresarial.</p>
+        </div>
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Analista">
+        <div class="contenido">
+          <h4>Monitoreo y análisis</h4>
+          <p>Diagnóstico de sistemas en tiempo real para detectar oportunidades de mejora.</p>
+        </div>
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Atención">
+        <div class="contenido">
+          <h4>Atención al cliente 24/7</h4>
+          <p>Soporte automático y humano para una experiencia superior.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="color:#4DB8FF;margin:40px 0 20px;">🔍 Analista de Sistemas Inteligente</h3>
+    <div class="galeria-grid">
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Análisis">
+        <div class="contenido">
+          <h4>Diagnóstico y métricas</h4>
+          <p>Revisión de paneles y datos para identificar puntos críticos.</p>
+        </div>
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" alt="Predicción">
+        <div class="contenido">
+          <h4>Análisis predictivo</h4>
+          <p>Anticiparse a fallas antes de que afecten la operación.</p>
+        </div>
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="Consultoría">
+        <div class="contenido">
+          <h4>Consultoría tecnológica</h4>
+          <p>Acompañamiento experto para optimizar sistemas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="color:#4DB8FF;margin:40px 0 20px;">💬 Atención al Cliente Inteligente</h3>
+    <div class="galeria-grid">
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Soporte">
+        <div class="contenido">
+          <h4>Soporte 24/7</h4>
+          <p>Asistencia continua a través de agentes virtuales.</p>
+        </div>
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&q=80" alt="Interacción">
+        <div class="contenido">
+          <h4>Interacción humana</h4>
+          <p>Combinación de tecnología y calidez.</p>
+        </div>
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80" alt="Gestión">
+        <div class="contenido">
+          <h4>Gestión de consultas</h4>
+          <p>Clasificación automática y respuestas rápidas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      📱 <a href="https://wa.me/5491165933031">+54 9 11 6593-3031</a> | 📧 baruaanibal268@gmail.com | © 2026 NEXUS
+    </footer>
+  </div>
+
+  <script>
+    const API_KEY = '';
+    let currentTab = 'simple';
+    let history = [];
+    const PROMPTS = {
+      simple: "Eres NEXUS Simple. Atención al cliente y ventas 24/7. Precio: USD 1.800 + USD 100/mes.",
+      pro: "Eres NEXUS Profesional. Atención + análisis de sistemas. Precio: USD 2.400.",
+      senior: "Eres NEXUS Senior. Automatización avanzada y monitoreo. Precio: USD 3.200.",
+      enterprise: "Eres NEXUS Enterprise. Solución corporativa completa. Precio a consultar."
+    };
+    const WELCOMES = {
+      simple: "👋 ¡Hola! Soy <strong>NEXUS Simple</strong>. Estoy aquí para atender a tus clientes y ayudarte a vender 24/7. Escribime tu consulta.",
+      pro: "👋 ¡Hola! Soy <strong>NEXUS Profesional</strong>. Incluye atención al cliente y análisis de sistemas. ¿En qué puedo ayudarte?",
+      senior: "👋 ¡Hola! Soy <strong>NEXUS Senior</strong>. Automatización avanzada y monitoreo preventivo. ¿Cómo puedo asistirte?",
+      enterprise: "👋 ¡Hola! Soy <strong>NEXUS Enterprise</strong>. Solución corporativa completa. Cuéntame sobre tu organización."
+    };
+
+    function switchTab(tab) {
+      currentTab = tab;
+      history = [];
+      document.getElementById('messages').innerHTML = '';
+      addMessage('bot', WELCOMES[tab]);
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.tab.${tab === 'simple' ? 'active' : ''}`)?.classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function addMessage(role, text) {
+      const div = document.createElement('div');
+      div.className = `msg ${role}`;
+      div.innerHTML = text;
+      document.getElementById('messages').appendChild(div);
+      document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage('user', text);
+      input.value = '';
+      history.push({ role: 'user', content: text });
+      if (history.length > 10) history = history.slice(-10);
+
+      try {
+        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ model: 'openai/gpt-4o-mini', messages: [{ role: 'system', content: PROMPTS[currentTab] }, ...history], temperature: 0.3, max_tokens: 500 })
+        });
+        const data = await res.json();
+        const reply = data.choices?.[0]?.message?.content || 'Error. Intenta de nuevo.';
+        history.push({ role: 'assistant', content: reply });
+        addMessage('bot', reply);
+      } catch (e) {
+        addMessage('bot', 'Error de conexión. Intenta de nuevo.');
+      }
+    }
+
+    document.getElementById('userInput').addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+  </script>
+</body>
+</html>

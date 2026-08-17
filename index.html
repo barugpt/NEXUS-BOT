@@ -10,11 +10,15 @@
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0f1a; color: #e0e0e0; line-height: 1.6; }
     .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 
-    .logo { text-align: center; margin-bottom: 30px; }
+    .logo { text-align: center; margin-bottom: 20px; }
     .logo h1 { font-size: 3rem; color: #0ff; }
     .logo p { color: #a0aec0; }
 
-    .tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+    .lang-selector { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
+    .lang-btn { background: #111827; color: #fff; border: 2px solid #0ff; padding: 10px 16px; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+    .lang-btn.active { background: #0ff; color: #000; }
+
+    .tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
     .tab { padding: 12px 20px; border-radius: 30px; font-weight: bold; cursor: pointer; border: 2px solid #2d3748; background: #111827; color: #a0aec0; transition: 0.3s; }
     .tab:hover { border-color: #0ff; color: #fff; }
     .tab.active { background: #0ff; color: #0a0f1a; border-color: #0ff; }
@@ -55,7 +59,15 @@
   <div class="container">
     <div class="logo">
       <h1>⚡ NEXUS</h1>
-      <p>Automatización inteligente en tiempo real</p>
+      <p id="subtitle">Automatización inteligente en tiempo real</p>
+    </div>
+
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="changeLanguage('es')">🇪🇸 ES</button>
+      <button class="lang-btn" onclick="changeLanguage('en')">🇬🇧 EN</button>
+      <button class="lang-btn" onclick="changeLanguage('pt')">🇧🇷 PT</button>
+      <button class="lang-btn" onclick="changeLanguage('fr')">🇫🇷 FR</button>
+      <button class="lang-btn" onclick="changeLanguage('de')">🇩🇪 DE</button>
     </div>
 
     <div class="tabs">
@@ -67,7 +79,7 @@
 
     <div class="chat-box">
       <div class="messages" id="messages">
-        <div class="msg bot">👋 ¡Hola! Soy <strong>NEXUS Simple</strong>. Estoy aquí para atender a tus clientes y ayudarte a vender 24/7. Escribime tu consulta.</div>
+        <div class="msg bot" id="welcomeMsg">👋 ¡Hola! Soy <strong>NEXUS Simple</strong>. Atención al cliente y ventas 24/7. Escribime tu consulta.</div>
       </div>
       <div class="input-area">
         <input type="text" id="userInput" placeholder="Escribí tu consulta..." autofocus>
@@ -76,94 +88,193 @@
     </div>
 
     <div class="pricing">
-      <div class="price-card"><h4>🟢 Simple</h4><p class="price">USD 1.800</p><p style="color:#a0aec0">+ USD 100/mes</p></div>
-      <div class="price-card"><h4>🟡 Profesional</h4><p class="price">USD 2.400</p></div>
-      <div class="price-card"><h4>🟠 Senior</h4><p class="price">USD 3.200</p></div>
-      <div class="price-card"><h4>🔴 Enterprise</h4><p class="price">Consultar</p></div>
+      <div class="price-card"><h4 id="plan1">🟢 Simple</h4><p class="price">USD 1.800</p><p style="color:#a0aec0">+ USD 100/mes</p></div>
+      <div class="price-card"><h4 id="plan2">🟡 Profesional</h4><p class="price">USD 2.400</p></div>
+      <div class="price-card"><h4 id="plan3">🟠 Senior</h4><p class="price">USD 3.200</p></div>
+      <div class="price-card"><h4 id="plan4">🔴 Enterprise</h4><p class="price">Consultar</p></div>
     </div>
 
-    <h2 style="color:#0ff;margin:50px 0 20px;">🖼️ Proyectos y Entornos Reales</h2>
-    <p style="text-align:center;max-width:900px;margin:0 auto 40px;">
-      Cada imagen representa un entorno profesional con su explicación detallada, mostrando cómo NEXUS potencia la automatización, el análisis y la atención empresarial.
-    </p>
+    <h2 style="color:#0ff;margin:50px 0 20px;" id="galeriaTitle">🖼️ Proyectos y Entornos Reales</h2>
 
-    <h3 style="color:#4DB8FF;margin:40px 0 20px;">⚙️ Automatización Empresarial</h3>
     <div class="galeria-grid">
       <div class="galeria-item">
         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Automatización">
-        <div class="contenido"><h4>Flujos de trabajo inteligentes</h4><p>Automatización de procesos operativos y administrativos para mejorar la productividad empresarial.</p></div>
+        <div class="contenido"><h4 id="gal1t">Flujos de trabajo inteligentes</h4><p id="gal1d">Automatización de procesos operativos y administrativos para mejorar la productividad empresarial.</p></div>
       </div>
       <div class="galeria-item">
         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Analista">
-        <div class="contenido"><h4>Monitoreo y análisis</h4><p>Diagnóstico de sistemas en tiempo real para detectar oportunidades de mejora.</p></div>
+        <div class="contenido"><h4 id="gal2t">Monitoreo y análisis</h4><p id="gal2d">Diagnóstico de sistemas en tiempo real para detectar oportunidades de mejora.</p></div>
       </div>
       <div class="galeria-item">
         <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Atención">
-        <div class="contenido"><h4>Atención al cliente 24/7</h4><p>Soporte automático y humano para una experiencia superior.</p></div>
-      </div>
-    </div>
-
-    <h3 style="color:#4DB8FF;margin:40px 0 20px;">🔍 Analista de Sistemas Inteligente</h3>
-    <div class="galeria-grid">
-      <div class="galeria-item">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Análisis">
-        <div class="contenido"><h4>Diagnóstico y métricas</h4><p>Revisión de paneles y datos para identificar puntos críticos.</p></div>
-      </div>
-      <div class="galeria-item">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" alt="Predicción">
-        <div class="contenido"><h4>Análisis predictivo</h4><p>Anticiparse a fallas antes de que afecten la operación.</p></div>
-      </div>
-      <div class="galeria-item">
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="Consultoría">
-        <div class="contenido"><h4>Consultoría tecnológica</h4><p>Acompañamiento experto para optimizar sistemas.</p></div>
-      </div>
-    </div>
-
-    <h3 style="color:#4DB8FF;margin:40px 0 20px;">💬 Atención al Cliente Inteligente</h3>
-    <div class="galeria-grid">
-      <div class="galeria-item">
-        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Soporte">
-        <div class="contenido"><h4>Soporte 24/7</h4><p>Asistencia continua a través de agentes virtuales.</p></div>
-      </div>
-      <div class="galeria-item">
-        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&q=80" alt="Interacción">
-        <div class="contenido"><h4>Interacción humana</h4><p>Combinación de tecnología y calidez.</p></div>
-      </div>
-      <div class="galeria-item">
-        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80" alt="Gestión">
-        <div class="contenido"><h4>Gestión de consultas</h4><p>Clasificación automática y respuestas rápidas.</p></div>
+        <div class="contenido"><h4 id="gal3t">Atención al cliente 24/7</h4><p id="gal3d">Soporte automático y humano para una experiencia superior.</p></div>
       </div>
     </div>
 
     <footer>
-      📱 <a href="https://wa.me/5491165933031">+54 9 11 6593-3031</a> | 📧 baruaanibal268@gmail.com | © 2026 NEXUS
+      📱 <a href="https://wa.me/5491165933031">+54 9 11 6593-3031</a> | 📧 baruaanibal268@gmail.com | <span id="footerText">© 2026 NEXUS</span>
     </footer>
   </div>
 
   <script>
     const API_KEY = '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';
     let currentTab = 'simple';
+    let currentLanguage = 'es';
     let history = [];
 
-    const PROMPTS = {
-      simple: "You are NEXUS Simple from Bereshith Mundo Digital. RULE 1: Detect the customer's language (Spanish, English, Portuguese, French, German, or any other). Answer ONLY in that same language. Never mix languages. You help with customer service automation. Price: USD 1,800 + USD 100/month. Ask questions before giving the price. Offer a free demo.",
-      pro: "You are NEXUS Professional. Sales consultant. RULE 1: Detect the customer's language and answer ONLY in that same language. Supported: Spanish, English, Portuguese, French, German. Never mix. Ask discovery questions about industry, employees, and main problem. Then offer a live demo. Price: USD 2,400. Do not give the price unless asked directly.",
-      senior: "You are NEXUS Senior. B2B automation expert. RULE 1: Detect the customer's language and answer ONLY in that same language. Supported: Spanish, English, Portuguese, French, German. Never mix. You work with companies of 100-500 employees. Ask about manual processes, CRM/ERP, and hours lost in customer service. Offer a free audit. Price: USD 3,200. Do not quote without a meeting.",
-      enterprise: "You are NEXUS Enterprise. Strategic advisor for large companies. RULE 1: Detect the customer's language and answer ONLY in that same language. Supported: Spanish, English, Portuguese, French, German. Never mix. You sell operational transformation, not a chatbot. Ask high-level questions about plants, countries, integrations, and cost reduction goals. Offer a personal demo. Price: custom."
+    const translations = {
+      es: {
+        subtitle: "Automatización inteligente en tiempo real",
+        welcome: "👋 ¡Hola! Soy <strong>NEXUS Simple</strong>. Atención al cliente y ventas 24/7. Escribime tu consulta.",
+        placeholder: "Escribí tu consulta...",
+        plan1: "🟢 Simple",
+        plan2: "🟡 Profesional",
+        plan3: "🟠 Senior",
+        plan4: "🔴 Enterprise",
+        galeriaTitle: "🖼️ Proyectos y Entornos Reales",
+        gal1t: "Flujos de trabajo inteligentes",
+        gal1d: "Automatización de procesos operativos y administrativos para mejorar la productividad empresarial.",
+        gal2t: "Monitoreo y análisis",
+        gal2d: "Diagnóstico de sistemas en tiempo real para detectar oportunidades de mejora.",
+        gal3t: "Atención al cliente 24/7",
+        gal3d: "Soporte automático y humano para una experiencia superior.",
+        footerText: "© 2026 NEXUS"
+      },
+      en: {
+        subtitle: "Real-time intelligent automation",
+        welcome: "👋 Hello! I am <strong>NEXUS Simple</strong>. Customer service and sales 24/7. Type your query.",
+        placeholder: "Type your query...",
+        plan1: "🟢 Simple",
+        plan2: "🟡 Professional",
+        plan3: "🟠 Senior",
+        plan4: "🔴 Enterprise",
+        galeriaTitle: "🖼️ Projects and Real Environments",
+        gal1t: "Intelligent workflows",
+        gal1d: "Automation of operational and administrative processes to improve business productivity.",
+        gal2t: "Monitoring and analysis",
+        gal2d: "Real-time system diagnosis to detect improvement opportunities.",
+        gal3t: "24/7 Customer Service",
+        gal3d: "Automatic and human support for a superior experience.",
+        footerText: "© 2026 NEXUS"
+      },
+      pt: {
+        subtitle: "Automação inteligente em tempo real",
+        welcome: "👋 Olá! Eu sou o <strong>NEXUS Simple</strong>. Atendimento e vendas 24/7. Digite sua consulta.",
+        placeholder: "Digite sua consulta...",
+        plan1: "🟢 Simples",
+        plan2: "🟡 Profissional",
+        plan3: "🟠 Sênior",
+        plan4: "🔴 Enterprise",
+        galeriaTitle: "🖼️ Projetos e Ambientes Reais",
+        gal1t: "Fluxos de trabalho inteligentes",
+        gal1d: "Automação de processos operacionais e administrativos para melhorar a produtividade.",
+        gal2t: "Monitoramento e análise",
+        gal2d: "Diagnóstico de sistemas em tempo real para detectar oportunidades.",
+        gal3t: "Atendimento ao cliente 24/7",
+        gal3d: "Suporte automático e humano para uma experiência superior.",
+        footerText: "© 2026 NEXUS"
+      },
+      fr: {
+        subtitle: "Automatisation intelligente en temps réel",
+        welcome: "👋 Bonjour! Je suis <strong>NEXUS Simple</strong>. Service client et ventes 24/7. Écrivez votre demande.",
+        placeholder: "Écrivez votre demande...",
+        plan1: "🟢 Simple",
+        plan2: "🟡 Professionnel",
+        plan3: "🟠 Senior",
+        plan4: "🔴 Enterprise",
+        galeriaTitle: "🖼️ Projets et Environnements Réels",
+        gal1t: "Flux de travail intelligents",
+        gal1d: "Automatisation des processus opérationnels et administratifs.",
+        gal2t: "Surveillance et analyse",
+        gal2d: "Diagnostic des systèmes en temps réel.",
+        gal3t: "Service client 24/7",
+        gal3d: "Support automatique et humain pour une expérience supérieure.",
+        footerText: "© 2026 NEXUS"
+      },
+      de: {
+        subtitle: "Intelligente Automatisierung in Echtzeit",
+        welcome: "👋 Hallo! Ich bin <strong>NEXUS Simple</strong>. Kundenservice und Vertrieb 24/7. Schreiben Sie Ihre Anfrage.",
+        placeholder: "Schreiben Sie Ihre Anfrage...",
+        plan1: "🟢 Einfach",
+        plan2: "🟡 Professionell",
+        plan3: "🟠 Senior",
+        plan4: "🔴 Enterprise",
+        galeriaTitle: "🖼️ Projekte und reale Umgebungen",
+        gal1t: "Intelligente Workflows",
+        gal1d: "Automatisierung von Betriebs- und Verwaltungsprozessen.",
+        gal2t: "Überwachung und Analyse",
+        gal2d: "Echtzeit-Systemdiagnose.",
+        gal3t: "24/7 Kundenservice",
+        gal3d: "Automatischer und menschlicher Support für eine bessere Erfahrung.",
+        footerText: "© 2026 NEXUS"
+      }
     };
 
-    const WELCOMES = {
-      simple: "👋 ¡Hola! Soy <strong>NEXUS Simple</strong>. Estoy aquí para atender a tus clientes y ayudarte a vender 24/7. Escribime tu consulta.",
-      pro: "👋 ¡Hola! Soy <strong>NEXUS Profesional</strong>. Incluye atención al cliente y análisis de sistemas. ¿En qué puedo ayudarte?",
-      senior: "👋 ¡Hola! Soy <strong>NEXUS Senior</strong>. Automatización avanzada y monitoreo preventivo. ¿Cómo puedo asistirte?",
-      enterprise: "👋 ¡Hola! Soy <strong>NEXUS Enterprise</strong>. Solución corporativa completa. Cuéntame sobre tu organización."
+    const PROMPTS = {
+      es: {
+        simple: "Eres NEXUS Simple. RESPONDE SOLO EN ESPAÑOL. Atención al cliente y ventas 24/7. Precio: USD 1.800 + USD 100/mes. Haz preguntas antes de dar el precio.",
+        pro: "Eres NEXUS Profesional. RESPONDE SOLO EN ESPAÑOL. Consultor de ventas. Precio: USD 2.400.",
+        senior: "Eres NEXUS Senior. RESPONDE SOLO EN ESPAÑOL. Experto B2B. Precio: USD 3.200.",
+        enterprise: "Eres NEXUS Enterprise. RESPONDE SOLO EN ESPAÑOL. Asesor estratégico. Precio: a consultar."
+      },
+      en: {
+        simple: "You are NEXUS Simple. RESPOND ONLY IN ENGLISH. Customer service and sales 24/7. Price: USD 1,800 + USD 100/month. Ask questions before giving the price.",
+        pro: "You are NEXUS Professional. RESPOND ONLY IN ENGLISH. Sales consultant. Price: USD 2,400.",
+        senior: "You are NEXUS Senior. RESPOND ONLY IN ENGLISH. B2B expert. Price: USD 3,200.",
+        enterprise: "You are NEXUS Enterprise. RESPOND ONLY IN ENGLISH. Strategic advisor. Price: custom."
+      },
+      pt: {
+        simple: "Você é o NEXUS Simple. RESPONDA APENAS EM PORTUGUÊS. Atendimento e vendas 24/7. Preço: USD 1.800 + USD 100/mês.",
+        pro: "Você é o NEXUS Profissional. RESPONDA APENAS EM PORTUGUÊS. Consultor de vendas. Preço: USD 2.400.",
+        senior: "Você é o NEXUS Senior. RESPONDA APENAS EM PORTUGUÊS. Especialista B2B. Preço: USD 3.200.",
+        enterprise: "Você é o NEXUS Enterprise. RESPONDA APENAS EM PORTUGUÊS. Consultor estratégico. Preço: sob consulta."
+      },
+      fr: {
+        simple: "Vous êtes NEXUS Simple. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Service client et ventes 24/7. Prix: USD 1.800 + USD 100/mois.",
+        pro: "Vous êtes NEXUS Professionnel. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Consultant commercial. Prix: USD 2.400.",
+        senior: "Vous êtes NEXUS Senior. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Expert B2B. Prix: USD 3.200.",
+        enterprise: "Vous êtes NEXUS Enterprise. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Conseiller stratégique. Prix: sur demande."
+      },
+      de: {
+        simple: "Sie sind NEXUS Simple. ANTWORTEN SIE NUR AUF DEUTSCH. Kundenservice und Vertrieb 24/7. Preis: USD 1.800 + USD 100/Monat.",
+        pro: "Sie sind NEXUS Professional. ANTWORTEN SIE NUR AUF DEUTSCH. Vertriebsberater. Preis: USD 2.400.",
+        senior: "Sie sind NEXUS Senior. ANTWORTEN SIE NUR AUF DEUTSCH. B2B-Experte. Preis: USD 3.200.",
+        enterprise: "Sie sind NEXUS Enterprise. ANTWORTEN SIE NUR AUF DEUTSCH. Strategischer Berater. Preis: auf Anfrage."
+      }
     };
+
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      const t = translations[lang];
+
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('userInput').placeholder = t.placeholder;
+      document.getElementById('plan1').textContent = t.plan1;
+      document.getElementById('plan2').textContent = t.plan2;
+      document.getElementById('plan3').textContent = t.plan3;
+      document.getElementById('plan4').textContent = t.plan4;
+      document.getElementById('galeriaTitle').textContent = t.galeriaTitle;
+      document.getElementById('gal1t').textContent = t.gal1t;
+      document.getElementById('gal1d').textContent = t.gal1d;
+      document.getElementById('gal2t').textContent = t.gal2t;
+      document.getElementById('gal2d').textContent = t.gal2d;
+      document.getElementById('gal3t').textContent = t.gal3t;
+      document.getElementById('gal3d').textContent = t.gal3d;
+      document.getElementById('footerText').textContent = t.footerText;
+
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="changeLanguage('${lang}')"]`).classList.add('active');
+
+      history = [];
+      document.getElementById('messages').innerHTML = '';
+      addMessage('bot', t.welcome);
+    }
 
     function switchTab(tab) {
       currentTab = tab;
       history = [];
       document.getElementById('messages').innerHTML = '';
-      addMessage('bot', WELCOMES[tab]);
+      addMessage('bot', translations[currentLanguage].welcome);
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelector(`.tab.${tab === 'simple' ? 'active' : ''}`)?.classList.add('active');
       event.target.classList.add('active');
@@ -186,6 +297,8 @@
       history.push({ role: 'user', content: text });
       if (history.length > 10) history = history.slice(-10);
 
+      const systemPrompt = PROMPTS[currentLanguage][currentTab];
+
       try {
         const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
           method: 'POST',
@@ -198,7 +311,7 @@
           body: JSON.stringify({
             model: 'openai/gpt-4o-mini',
             messages: [
-              { role: 'system', content: PROMPTS[currentTab] },
+              { role: 'system', content: systemPrompt },
               ...history
             ],
             temperature: 0.3,

@@ -117,8 +117,8 @@
   </div>
 
   <script>
-    // ✅ API KEY DE DEEPSEEK (directa, sin intermediarios)
-    const API_KEY = sk-febb2388be344d2aa8636225aa084704
+    // ✅ API KEY DE DEEPSEEK (corregida con comillas)
+    const API_KEY = 'sk-febb2388be344d2aa8636225aa084704';
 
     let currentTab = 'simple';
     let currentLanguage = 'es';
@@ -312,7 +312,7 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            model: 'deepseek-v4-pro',
+            model: 'deepseek-chat',  // Cambiado a un modelo estable y recomendado
             messages: [
               { role: 'system', content: systemPrompt },
               ...history

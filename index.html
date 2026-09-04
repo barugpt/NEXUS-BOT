@@ -24,7 +24,7 @@
     .tab.active { background: #0ff; color: #0a0f1a; border-color: #0ff; }
 
     .chat-box { background: #111827; border: 1px solid #2d3748; border-radius: 16px; padding: 25px; min-height: 350px; display: flex; flex-direction: column; }
-    .messages { flex: 1; overflow-y: auto; margin-bottom: 20px; padding-right: 10px; }
+    .messages { flex: 1; overflow-y: auto; margin-bottom: 20px; padding-right: 10px; max-height: 400px; }
     .msg { margin-bottom: 12px; padding: 12px 16px; border-radius: 12px; max-width: 80%; word-wrap: break-word; font-size: 0.95rem; line-height: 1.4; }
     .msg.bot { background: #1e293b; border: 1px solid #0ff; color: #e0e0e0; }
     .msg.user { background: #0ff; color: #0a0f1a; margin-left: auto; text-align: right; }
@@ -117,7 +117,9 @@
   </div>
 
   <script>
-    const API_KEY = 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
+    // ✅ API KEY DE DEEPSEEK (directa, sin intermediarios)
+    const API_KEY = 'sk-9ef7600c445a4f6a8f71fb463032f086';
+
     let currentTab = 'simple';
     let currentLanguage = 'es';
     let history = [];
@@ -212,34 +214,34 @@
 
     const PROMPTS = {
       es: {
-        simple: "Eres NEXUS Simple. RESPONDE SOLO EN ESPAÑOL. Atención al cliente y ventas 24/7. Precio: USD 1.800 + USD 100/mes. Haz preguntas antes de dar el precio.",
-        pro: "Eres NEXUS Profesional. RESPONDE SOLO EN ESPAÑOL. Consultor de ventas. Precio: USD 2.400.",
-        senior: "Eres NEXUS Senior. RESPONDE SOLO EN ESPAÑOL. Experto B2B. Precio: USD 3.200.",
-        enterprise: "Eres NEXUS Enterprise. RESPONDE SOLO EN ESPAÑOL. Asesor estratégico. Precio: a consultar."
+        simple: "Eres NEXUS Simple. RESPONDE SOLO EN ESPAÑOL. Atención al cliente y ventas 24/7. Precio: USD 1.800 + USD 100/mes. Haz preguntas antes de dar el precio. Sé profesional y amable.",
+        pro: "Eres NEXUS Profesional. RESPONDE SOLO EN ESPAÑOL. Consultor de ventas especializado en automatización. Precio: USD 2.400. Enfócate en soluciones personalizadas.",
+        senior: "Eres NEXUS Senior. RESPONDE SOLO EN ESPAÑOL. Experto B2B con más de 10 años en automatización. Precio: USD 3.200. Ofrece análisis estratégico avanzado.",
+        enterprise: "Eres NEXUS Enterprise. RESPONDE SOLO EN ESPAÑOL. Asesor estratégico para grandes empresas. Precio: a consultar. Enfócate en transformación digital integral."
       },
       en: {
-        simple: "You are NEXUS Simple. RESPOND ONLY IN ENGLISH. Customer service and sales 24/7. Price: USD 1,800 + USD 100/month. Ask questions before giving the price.",
-        pro: "You are NEXUS Professional. RESPOND ONLY IN ENGLISH. Sales consultant. Price: USD 2,400.",
-        senior: "You are NEXUS Senior. RESPOND ONLY IN ENGLISH. B2B expert. Price: USD 3,200.",
-        enterprise: "You are NEXUS Enterprise. RESPOND ONLY IN ENGLISH. Strategic advisor. Price: custom."
+        simple: "You are NEXUS Simple. RESPOND ONLY IN ENGLISH. Customer service and sales 24/7. Price: USD 1,800 + USD 100/month. Ask questions before giving the price. Be professional and friendly.",
+        pro: "You are NEXUS Professional. RESPOND ONLY IN ENGLISH. Sales consultant specialized in automation. Price: USD 2,400. Focus on customized solutions.",
+        senior: "You are NEXUS Senior. RESPOND ONLY IN ENGLISH. B2B expert with over 10 years in automation. Price: USD 3,200. Offer advanced strategic analysis.",
+        enterprise: "You are NEXUS Enterprise. RESPOND ONLY IN ENGLISH. Strategic advisor for large companies. Price: custom. Focus on comprehensive digital transformation."
       },
       pt: {
-        simple: "Você é o NEXUS Simple. RESPONDA APENAS EM PORTUGUÊS. Atendimento e vendas 24/7. Preço: USD 1.800 + USD 100/mês.",
-        pro: "Você é o NEXUS Profissional. RESPONDA APENAS EM PORTUGUÊS. Consultor de vendas. Preço: USD 2.400.",
-        senior: "Você é o NEXUS Senior. RESPONDA APENAS EM PORTUGUÊS. Especialista B2B. Preço: USD 3.200.",
-        enterprise: "Você é o NEXUS Enterprise. RESPONDA APENAS EM PORTUGUÊS. Consultor estratégico. Preço: sob consulta."
+        simple: "Você é o NEXUS Simple. RESPONDA APENAS EM PORTUGUÊS. Atendimento e vendas 24/7. Preço: USD 1.800 + USD 100/mês. Seja profissional e amigável.",
+        pro: "Você é o NEXUS Profissional. RESPONDA APENAS EM PORTUGUÊS. Consultor de vendas especializado em automação. Preço: USD 2.400.",
+        senior: "Você é o NEXUS Senior. RESPONDA APENAS EM PORTUGUÊS. Especialista B2B com mais de 10 anos em automação. Preço: USD 3.200.",
+        enterprise: "Você é o NEXUS Enterprise. RESPONDA APENAS EM PORTUGUÊS. Consultor estratégico para grandes empresas. Preço: sob consulta."
       },
       fr: {
-        simple: "Vous êtes NEXUS Simple. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Service client et ventes 24/7. Prix: USD 1.800 + USD 100/mois.",
-        pro: "Vous êtes NEXUS Professionnel. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Consultant commercial. Prix: USD 2.400.",
-        senior: "Vous êtes NEXUS Senior. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Expert B2B. Prix: USD 3.200.",
-        enterprise: "Vous êtes NEXUS Enterprise. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Conseiller stratégique. Prix: sur demande."
+        simple: "Vous êtes NEXUS Simple. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Service client et ventes 24/7. Prix: USD 1.800 + USD 100/mois. Soyez professionnel et sympathique.",
+        pro: "Vous êtes NEXUS Professionnel. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Consultant commercial spécialisé en automatisation. Prix: USD 2.400.",
+        senior: "Vous êtes NEXUS Senior. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Expert B2B avec plus de 10 ans en automatisation. Prix: USD 3.200.",
+        enterprise: "Vous êtes NEXUS Enterprise. RÉPONDEZ UNIQUEMENT EN FRANÇAIS. Conseiller stratégique pour grandes entreprises. Prix: sur demande."
       },
       de: {
-        simple: "Sie sind NEXUS Simple. ANTWORTEN SIE NUR AUF DEUTSCH. Kundenservice und Vertrieb 24/7. Preis: USD 1.800 + USD 100/Monat.",
-        pro: "Sie sind NEXUS Professional. ANTWORTEN SIE NUR AUF DEUTSCH. Vertriebsberater. Preis: USD 2.400.",
-        senior: "Sie sind NEXUS Senior. ANTWORTEN SIE NUR AUF DEUTSCH. B2B-Experte. Preis: USD 3.200.",
-        enterprise: "Sie sind NEXUS Enterprise. ANTWORTEN SIE NUR AUF DEUTSCH. Strategischer Berater. Preis: auf Anfrage."
+        simple: "Sie sind NEXUS Simple. ANTWORTEN SIE NUR AUF DEUTSCH. Kundenservice und Vertrieb 24/7. Preis: USD 1.800 + USD 100/Monat. Seien Sie professionell und freundlich.",
+        pro: "Sie sind NEXUS Professional. ANTWORTEN SIE NUR AUF DEUTSCH. Vertriebsberater mit Spezialisierung auf Automatisierung. Preis: USD 2.400.",
+        senior: "Sie sind NEXUS Senior. ANTWORTEN SIE NUR AUF DEUTSCH. B2B-Experte mit über 10 Jahren Automatisierungserfahrung. Preis: USD 3.200.",
+        enterprise: "Sie sind NEXUS Enterprise. ANTWORTEN SIE NUR AUF DEUTSCH. Strategischer Berater für Großunternehmen. Preis: auf Anfrage."
       }
     };
 
@@ -273,11 +275,14 @@
     function switchTab(tab) {
       currentTab = tab;
       history = [];
-      document.getElementById('messages').innerHTML = '';
+      const messages = document.getElementById('messages');
+      messages.innerHTML = '';
       addMessage('bot', translations[currentLanguage].welcome);
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelector(`.tab.${tab === 'simple' ? 'active' : ''}`)?.classList.add('active');
-      event.target.classList.add('active');
+      
+      const tabMap = { simple: 0, pro: 1, senior: 2, enterprise: 3 };
+      const idx = tabMap[tab] || 0;
+      document.querySelectorAll('.tab')[idx].classList.add('active');
     }
 
     function addMessage(role, text) {
@@ -300,22 +305,20 @@
       const systemPrompt = PROMPTS[currentLanguage][currentTab];
 
       try {
-        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${API_KEY}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': window.location.href,
-            'X-Title': 'NEXUS'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            model: 'openai/gpt-4o-mini',
+            model: 'deepseek-v4-pro',
             messages: [
               { role: 'system', content: systemPrompt },
               ...history
             ],
-            temperature: 0.3,
-            max_tokens: 500
+            temperature: 0.5,
+            max_tokens: 600
           })
         });
 
@@ -329,7 +332,7 @@
         history.push({ role: 'assistant', content: reply });
         addMessage('bot', reply);
       } catch (e) {
-        addMessage('bot', 'Error: ' + e.message);
+        addMessage('bot', '⚠️ Error: ' + e.message);
       }
     }
 
